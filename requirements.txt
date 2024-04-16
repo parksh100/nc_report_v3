@@ -1,0 +1,6 @@
+streamlit
+pandas
+numpy
+reportlab
+PyPDF2
+mysql-connector-python
