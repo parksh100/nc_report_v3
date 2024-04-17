@@ -9,17 +9,18 @@ from reportlab.lib import colors
 import PyPDF2
 import os
 from io import BytesIO
-
+from dotenv import load_dotenv
+load_dotenv()
 
 # ===데이터베이스에서 데이터 불러오기===
 def load_data(standard):
     try:
         # 환경변수 불러오기
-        DB_HOST = os.getenv("DB_HOST")
-        DB_USER = os.getenv("DB_USER")
-        DB_PASSWORD = os.getenv("DB_PASSWORD")
-        DB_NAME = os.getenv("DB_NAME")
-        
+        DB_HOST = os.getenv("DB_HOST", "localhost")
+        DB_USER = os.getenv("DB_USER", "root")
+        DB_PASSWORD = os.getenv("DB_PASSWORD", "goal7749^^")
+        DB_NAME = os.getenv("DB_NAME", "s2report_generator")
+            
         conn = mysql.connector.connect(
             host=DB_HOST,
             user=DB_USER,
