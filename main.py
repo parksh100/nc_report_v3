@@ -187,7 +187,8 @@ if st.button('부적합 보고서 생성'):
             audit_no = audit_no
             standard = standard
             auditor = auditor
-            manager = manager            
+            manager = manager
+            verifier = verifier             
             nc_content = st.session_state.modified_data.get('nc_content', '')
             nc_clause_content = st.session_state.modified_data.get('nc_clause_content', '')
             cause = st.session_state.modified_data.get('cause', '')
@@ -253,6 +254,7 @@ if st.button('부적합 보고서 생성'):
             wrap_text(can, st.session_state.modified_data.get('corrective_action', ''), 80, 285, 430, 'NanumGothic', 10, 3)
             wrap_text(can, st.session_state.modified_data.get('nc_pvt_recur', ''), 80, 226, 430, 'NanumGothic', 10, 3)
             can.drawString(170, 142, manager)
+            can.drawString(430, 142, verifier)
             can.drawString(170, 165, corrective_action_date)
     
             
