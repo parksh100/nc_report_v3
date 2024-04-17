@@ -273,11 +273,11 @@ if st.button('부적합 보고서 생성'):
         st.success("수정된 내용이 적용된 새로운 PDF 파일이 생성되었습니다.")
         
         # PDF 파일 다운로드 버튼 추가
-        with open('modified_nc_report.pdf', 'rb') as file:
+        with open(file_name, 'rb') as file:
             btn = st.download_button(
                 label="부적합 보고서 다운로드",
                 data=file,
-                file_name='modified_nc_report.pdf',
+                file_name=file_name,
                 mime='application/pdf'
             )
     else:
