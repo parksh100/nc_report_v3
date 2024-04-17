@@ -9,8 +9,11 @@ from reportlab.lib import colors
 import PyPDF2
 import os
 from io import BytesIO
-from dotenv import load_dotenv
-load_dotenv()
+
+# 로컬 환경에서만 .env 파일 로드
+if 'STREAMLIT_CLOUD' not in os.environ:
+    from dotenv import load_dotenv
+    load_dotenv()
 
 # ===데이터베이스에서 데이터 불러오기===
 def load_data(standard):
