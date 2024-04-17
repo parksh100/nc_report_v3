@@ -258,8 +258,17 @@ if st.button('부적합 보고서 생성'):
             # 수정된 PDF 파일 저장
             current_date = datetime.now().strftime("%Y%m%d")
             file_name = f"{output_folder}/nc_report_{customer}_{current_date}.pdf"
+            
             with open(file_name, 'wb') as new_pdf_file:
                 pdf_writer.write(new_pdf_file)
+                
+            # 파일 존재 여부 확인 후 파일 열기
+            if os.path.exists(file_name):
+                with open(file_name, 'rb') as file:
+                    # 파일을 읽고 처리하는 로직 추가
+                    print("파일이 성공적으로 열렸습니다.")
+            else:
+                print(f"에러: 파일을 찾을 수 없습니다. {file_name}")
 
         st.success("수정된 내용이 적용된 새로운 PDF 파일이 생성되었습니다.")
         
