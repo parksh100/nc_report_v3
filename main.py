@@ -92,6 +92,9 @@ if 'modified_data' not in st.session_state:
     st.session_state.modified_data = {}
 
 if st.button('데이터 불러오기'):
+    if customer == '' or audit_no == '' or auditor == '' or manager == '' or verifier == '' or scope == '' or standard == '' or nc_grade == '' or audit_type == '' or issue_date == '' or corrective_action_date == '':
+        st.warning("입력값이 부족합니다. 모든 값을 입력해주세요.")
+        st.stop()
     with st.spinner('데이터를 불러오고 있습니다...'):
         time.sleep(2)
         st.success('데이터 조회 성공! 내용을 편집 후 수정 완료 버튼을 눌러주세요.')
@@ -175,7 +178,7 @@ if st.button('부적합 보고서 생성'):
         with open('nc_report.pdf', 'rb') as pdf_file:
             pdf_reader = PyPDF2.PdfReader(pdf_file)
             pdf_writer = PyPDF2.PdfWriter()
-
+            
             # 수정된 데이터를 PDF에 추가
             issue_date = issue_date.strftime("%Y-%m-%d")
             corrective_action_date = corrective_action_date.strftime("%Y-%m-%d")
