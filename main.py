@@ -9,6 +9,7 @@ from reportlab.lib import colors
 import PyPDF2
 import os
 from io import BytesIO
+import time
 
 # 로컬 환경에서만 .env 파일 로드
 try:
@@ -90,16 +91,19 @@ if 'modified_data' not in st.session_state:
     st.session_state.modified_data = {}
 
 if st.button('데이터 불러오기'):
-    data = load_data(standard)
-    if data:
-        # 직접 데이터 세션 상태에 할당
-        st.session_state.modified_data = {
-            'nc_content': data[2],
-            'nc_clause_content': data[3],
-            'cause': data[4],
-            'corrective_action': data[5],
-            'nc_pvt_recur': data[6]
-        }
+    with st.spinner('데이터를 불러오고 있습니다...'):
+        time.sleep(3)
+        # st.success('Done!')
+        data = load_data(standard)
+        if data:
+            # 직접 데이터 세션 상태에 할당
+            st.session_state.modified_data = {
+                'nc_content': data[2],
+                'nc_clause_content': data[3],
+                'cause': data[4],
+                'corrective_action': data[5],
+                'nc_pvt_recur': data[6]
+            }
         
 # 수정 입력 필드 표시
 if 'modified_data' in st.session_state:
