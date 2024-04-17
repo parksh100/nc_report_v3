@@ -71,7 +71,8 @@ with col_left:
     customer = st.text_input("고객명", placeholder='고객명')
     audit_type = st.radio("심사유형", ["최초", "1차사후", "2차사후", "갱신"], horizontal=True)
     nc_grade = st.radio("부적합 등급", ["경부적합", "중부적합"], horizontal=True)
-    scope = st.text_area("인증범위", placeholder='인증범위')
+    scope = st.text_area("인증범위", placeholder='인증범위',height=140)
+    issue_date = st.date_input("발행일", datetime.now())
     
 with col_right:
     audit_no = st.text_input("심사번호", placeholder='심사번호')
@@ -79,7 +80,7 @@ with col_right:
     auditor = st.text_input("심사원명", placeholder='심사원명')
     # corrective = st.radio("시정조치", ["예정", "완료"], horizontal=True)
     manager = st.text_input("조직확인", placeholder='피심사조직 담당자')
-    issue_date = st.date_input("발행일", datetime.now())
+    verifier = st.text_input("유효성 확인", placeholder='유효성 검증자')
     corrective_action_date = st.date_input("시정조치 완료일", datetime.now())
     
 # st.write(customer, audit_type, nc_grade, scope, audit_no, standard, auditor, manager)
@@ -92,8 +93,8 @@ if 'modified_data' not in st.session_state:
 
 if st.button('데이터 불러오기'):
     with st.spinner('데이터를 불러오고 있습니다...'):
-        time.sleep(3)
-        # st.success('Done!')
+        time.sleep(2)
+        st.success('데이터 조회 성공! 내용을 편집 후 수정 완료 버튼을 눌러주세요.')
         data = load_data(standard)
         if data:
             # 직접 데이터 세션 상태에 할당
@@ -282,7 +283,7 @@ if st.button('부적합 보고서 생성'):
             else:
                 print(f"에러: 파일을 찾을 수 없습니다. {file_name}")
 
-        st.success("수정된 내용이 적용된 새로운 PDF 파일이 생성되었습니다.")
+        st.success("수정된 내용이 적용된 부적합보고서 파일이 생성되었습니다.")
         
         # PDF 파일 다운로드 버튼 추가
         with open(file_name, 'rb') as file:
