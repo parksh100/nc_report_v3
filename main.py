@@ -11,9 +11,13 @@ import os
 from io import BytesIO
 
 # 로컬 환경에서만 .env 파일 로드
-if 'STREAMLIT_CLOUD' not in os.environ:
-    from dotenv import load_dotenv
-    load_dotenv()
+try:
+    if 'STREAMLIT_CLOUD' not in os.environ:
+        from dotenv import load_dotenv
+        load_dotenv()
+except ImportError:
+    # dotenv 모듈이 설치되어 있지 않은 경우 무시
+    pass
 
 # ===데이터베이스에서 데이터 불러오기===
 def load_data(standard):
